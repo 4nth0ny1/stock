@@ -3,21 +3,15 @@ require 'open-uri'
 require 'json'
 require 'pry'
 
-## new plan use only the second api. Change the app to get financial information about the stock. then more information from the same one. 
-## one that is basic information and the second is advanced ratios about the company. 
-## first is company description, address, and employees.
-## second is financial ratios. 
-
-## and if that doesn't work you can pull data from the financial statements and use the stock class to make your own financial ratios instead of another pull from the api. 
-
-
 class API
-  ## https://iexcloud.io">Data provided by IEX Cloud
-   
+  ## https://iexcloud.io" >> Data provided by IEX Cloud API
+  ## https://www.alphavantage.co >> Data provided by AlphaVantage API
+
   ## Facebook API
   URL_iex_fb_price = "https://cloud.iexapis.com/stable/stock/fb/batch?types=quote,news,chart&range=1m&last=10&token=pk_64a3b816353a4d439a1ab35e94c99d32"
+  URL_facebook_more_info = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=FB&apikey=HJTLZC8RYU1KF8O0"
 
-    def get_iex_data_facebook
+  def get_iex_data_facebook
       uri = URI.parse(URL_iex_fb_price)
       response = Net::HTTP.get_response(uri)
       response.body
@@ -38,8 +32,6 @@ class API
       print "Volume: "
       puts latest_volume
     end
-
-  URL_facebook_more_info = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=FB&apikey=HJTLZC8RYU1KF8O0"
 
   def get_more_facebook_data
     uri = URI.parse(URL_facebook_more_info)
@@ -270,13 +262,7 @@ end
         print "EPS: "
         puts eps
     end
-  
 end
 
 
 
-# api = API.new
-# api.get_price_facebook
-
-# api = API.new
-# api.get_more_info_amazon
